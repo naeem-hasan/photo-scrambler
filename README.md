@@ -11,10 +11,15 @@ So you have the necessary requirements?! :relaxed:
 You scramble a photo using this command: `photo-scramble filename.jpg`. A scrambled image file will be generated in the current directory.
 But you can specify the horizontal AND/OR vertical cuts. If only horizontal number of cuts is defined, the vertical cut number is calculated automatically so that each chunk becomes closest to a square. See the examples.
 
-### Example usage:
+### Example usages:
 * `photo-scramble myphoto.png`
 * `photo-scramble myphoto.jpg 5`
 * `photo-scramble photo.jpg 3 6`
+
+## Scrambled with photo-scrambler:
+| Before                                                                                                   | After                                                                                                                    |
+|----------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
+| ![original](https://raw.githubusercontent.com/naeem-hasan/photo-scrambler/master/sample/harrypotter.jpg) | ![scrambled](https://raw.githubusercontent.com/naeem-hasan/photo-scrambler/master/sample/%5BSCRAMBLED%5Dharrypotter.jpg) |
 
 ### Note:
 The script breaks the photo into chunks, loads them in the memory and then places them randomly. Hence, it can be slow and memory consuming when dealing with large images or large number of cuts.
