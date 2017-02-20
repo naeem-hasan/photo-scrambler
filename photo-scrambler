@@ -1,0 +1,56 @@
+#!/usr/bin/python
+from PIL import Image
+from random import choice
+from math import ceil
+
+
+def scramble_photo(image_name, *args):
+    print "Hold on. Processing."
+    main_image = Image.open(image_name)
+    width, height = main_image.size
+
+    if args:
+        horizontal = int(args[0])
+        if len(args) == 1:
+            vertical = int(ceil((height * horizontal) / (width + 0.0)))
+        else:
+            vertical = int(args[1])
+    else:
+        horizontal = 5
+        vertical = int(ceil((height * horizontal) / (width + 0.0)))
+
+    chunk_width, chunk_height = width / horizontal, height / vertical
+
+    image_parts = []
+
+    start_height, start_width = 0, 0
+
+    for i in range(vertical):
+        for x in range(horizontal):
+            image_parts.append(main_image.crop((start_width, start_height, start_width + chunk_width, start_height + chunk_height)))
+            start_width += chunk_width
+        start_height += chunk_height
+        start_width = 0
+
+    start_height, start_width = 0, 0
+
+    for i in range(vertical):
+        for x in range(horizontal):
+            part = choice(image_parts)
+            image_parts.remove(part)
+            main_image.paste(part, (start_width, start_height))
+            start_width += chunk_width
+        start_height += chunk_height
+        start_width = 0
+
+    file_name = "[SCRAMBLED]" + image_name
+    main_image.save(file_name)
+    print "Done! Output written to", file_name
+
+
+if __name__ == '__main__':
+    from sys import argv
+    try:
+        scramble_photo(*argv[1:])
+    except Exception as e:
+        print e
